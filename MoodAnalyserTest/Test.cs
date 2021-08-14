@@ -10,24 +10,24 @@ namespace MoodAnalyserTest
         {
         }
         /// <summary>
-        /// Test Case 1.1
+        /// Test Case 1.1-Repeat
         /// </summary>
         [Test]
         public void GivenSadMessage_WhenAnalyse_ShouldReturnSad()
         {
-            MoodAnalyser mood = new MoodAnalyser();
-            string actual = mood.AnalyseMood("I am in Sad Mood");
-            Assert.AreEqual(actual, "Sad");
+            MoodAnalyser mood = new MoodAnalyser("I am in Sad Mood");
+            string actual = mood.AnalyseMood();
+            Assert.AreEqual(actual, "SAD");
         }
         /// <summary>
-        /// Test Case 1.2
+        /// Test Case 1.2-Repeat
         /// </summary>
         [Test]
         public void GivenAnyMoodMessage_WhenAnalyse_ShouldReturnHappy()
         {
-            MoodAnalyser mood = new MoodAnalyser();
-            string actual = mood.AnalyseMood("I am in Any Mood");
-            Assert.AreEqual(actual, "HAPPY");
+            MoodAnalyser mood = new MoodAnalyser("I am in Any Mood");
+            string actual = mood.AnalyseMood();
+            Assert.AreEqual(actual, "SAD");
         }
     }
 }
