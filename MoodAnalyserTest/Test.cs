@@ -35,8 +35,8 @@ namespace MoodAnalyserTest
         [Test]
         public void GivenNullMood_ShouldReturnHappy()
         {
-            MoodAnalyser moodAnalyser = new MoodAnalyser(null);
-            string actual = moodAnalyser.AnalyseMood();
+            MoodAnalyser mood = new MoodAnalyser(null);
+            string actual = mood.AnalyseMood();
             Assert.AreEqual(actual, "happy");
         }
     }
