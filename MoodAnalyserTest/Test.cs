@@ -1,3 +1,4 @@
+using moodanalyserproblem;
 using MoodAnalyserproblem;
 using NUnit.Framework;
 
@@ -17,7 +18,7 @@ namespace MoodAnalyserTest
         {
             MoodAnalyser mood = new MoodAnalyser("I am in Sad Mood");
             string actual = mood.AnalyseMood();
-            Assert.AreEqual(actual, "SAD");
+            Assert.AreEqual(actual, "sad");
         }
         /// <summary>
         /// Test Case 1.2-Repeat
@@ -27,7 +28,7 @@ namespace MoodAnalyserTest
         {
             MoodAnalyser mood = new MoodAnalyser("I am in Happy Mood");
             string actual = mood.AnalyseMood();
-            Assert.AreEqual(actual, "SAD");
+            Assert.AreEqual(actual, "happy");
         }
         /// <summary>
         /// Test Case 2.1 
@@ -74,6 +75,49 @@ namespace MoodAnalyserTest
                 Assert.AreEqual(ex.Message, expected);
             }
         }
+        /// <summary>
+        /// Test Case 4.1
+        /// </summary>
+        [Test]
+        public void GivenMoodAnalyserReflection_ShouldReturnObject()
+        {
+            object expected = new MoodAnalyser();
+            object actual = MoodAnalyserFactory.CreateMoodAnalyse("MoodAnalyserproblem.MoodAnalyser", "MoodAnalyser");
+            expected.Equals(actual);
+        }
 
+
+        ///// <summary>
+        /// test case 4.2
+        /// </summary>
+        [Test]
+        public void GivenClassNameImproper_ShouldReturnMoodAnalysisException()
+        {
+            string expected = "Class not found";
+            try
+            {
+                object actual = MoodAnalyserFactory.CreateMoodAnalyse("MoodAnalyserproblem.MoodAnalyser", "MoodAnalyser");
+            }
+            catch (MoodAnalyserException e)
+            {
+                Assert.AreEqual(expected, e.Message);
+            }
+        }
+        /// <summary>
+        /// test case 4.3
+        /// </summary>
+        [Test]
+        public void GivenConstructorNameImproper_ShouldReturnMoodAnalysisException()
+        {
+            string expected = "Constructor not found";
+            try
+            {
+                object actual = MoodAnalyserFactory.CreateMoodAnalyse("MoodAnalyserproblem.MoodAnalyser", "MoodAnalyser");
+            }
+            catch (MoodAnalyserException e)
+            {
+                Assert.AreEqual(expected, e.Message);
+            }
+        }
     }
 }

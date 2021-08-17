@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MoodAnalyserproblem
 {
     public class MoodAnalyser
     {
-        private string msg;
+        public string msg;
         public MoodAnalyser()
         {
 
@@ -37,7 +35,7 @@ namespace MoodAnalyserproblem
                     return "sad";
                 }
             }
-            catch (NullReferenceException )
+            catch (NullReferenceException)
             {
                 return "happy";
             }
