@@ -88,7 +88,7 @@ namespace MoodAnalyserTest
 
 
         ///// <summary>
-        /// test case 4.2
+        /// Test case 4.2
         /// </summary>
         [Test]
         public void GivenClassNameImproper_ShouldReturnMoodAnalysisException()
@@ -104,7 +104,7 @@ namespace MoodAnalyserTest
             }
         }
         /// <summary>
-        /// test case 4.3
+        /// Test case 4.3
         /// </summary>
         [Test]
         public void GivenConstructorNameImproper_ShouldReturnMoodAnalysisException()
@@ -117,6 +117,48 @@ namespace MoodAnalyserTest
             catch (MoodAnalyserException e)
             {
                 Assert.AreEqual(expected, e.Message);
+            }
+        }
+        /// <summary>
+        /// Test case 5.1
+        /// </summary>
+        [Test]
+        public void GivenMoodAnalyserParameterizedConstructor_ShouldReturnObject()
+        {
+            object expected = new MoodAnalyser("Parameter constructor");
+            object actual = MoodAnalyserFactory.CreateMoodAnalyserParameterizedConstructor("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyser", "Parameter constructor");
+            expected.Equals(actual);
+        }
+        /// <summary>
+        /// Test case 5.2
+        /// </summary>
+        [Test]
+        public void GivenClassNameImproperParameterizedConstructor_ShouldReturnMoodAnalysisException()
+        {
+            string expected = "Class not found";
+            try
+            {
+                object actual = MoodAnalyserFactory.CreateMoodAnalyserParameterizedConstructor("MoodAnalyser.MoodAnalyser", "MoodAnalyser", "Parameneter");
+            }
+            catch (MoodAnalyserException ex)
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
+        /// <summary>
+        /// Test case 5.3
+        /// </summary>
+        [Test]
+        public void GivenImproperParameterizedConstructorName_ShouldReturnMoodAnalysisException()
+        {
+            string expected = "Constructor not found";
+            try
+            {
+                object actual = MoodAnalyserFactory.CreateMoodAnalyserParameterizedConstructor("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyser", "Parameneter");
+            }
+            catch (MoodAnalyserException ex)
+            {
+                Assert.AreEqual(expected, ex.Message);
             }
         }
     }
