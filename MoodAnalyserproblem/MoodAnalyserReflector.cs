@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace moodanalyserproblem
 {
-    public class MoodAnalyserFactory
+    public class MoodAnalyserReflector
     {
         /// <summary>
         ///  CreateMoodAnalyse  method to create object of MoodAnalyse class
@@ -34,6 +34,7 @@ namespace moodanalyserproblem
 
                 }
             }
+
             // constructor name not equal to class name then throw exception constructor not found
             else
             {
@@ -49,9 +50,10 @@ namespace moodanalyserproblem
         /// <returns></returns>
         public static object CreateMoodAnalyserParameterizedConstructor(string className, string constructorName, string message)
         {
-            Type type = Type.GetType(className);
+            Type type = typeof(MoodAnalyser); 
             try
             {
+                
                 if (type.FullName.Equals(className) || type.Name.Equals(className))
                 {
                     if (type.Name.Equals(constructorName))
@@ -116,17 +118,19 @@ namespace moodanalyserproblem
         /// <param name="message"></param>
         /// <param name="methodName"></param>
         /// <returns></returns>
-        public static string InvokeAnalyseMood(string message, string methodName)
+        public static string InvokeAnalyseMood(string message,string methodName)
         {
             try
             {
-                Type type = Type.GetType("MoodAnalyser.AnalyseMood");
-                object moodAnalyseObject = MoodAnalyserFactory.CreateMoodAnalyserParameterizedConstructor("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyser", message);
+                Assembly executing = Assembly.GetExecutingAssembly();
+                Type type = executing.GetType("MoodAnalyserproblem.MoodAnalyser");
+                object moodAnalyseObject = CreateMoodAnalyserParameterizedConstructor("MoodAnalyserproblem.MoodAnalyser", "MoodAnalyser", message);
+                
                 MethodInfo methodInfo = type.GetMethod(methodName);
-                object mood = methodInfo.Invoke(moodAnalyseObject, null);
+                object mood = methodInfo.Invoke(moodAnalyseObject,null);
                 return mood.ToString();
             }
-            catch (NullReferenceException  )
+            catch ( NullReferenceException )
             {
                 throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD, "No method found");
             }
