@@ -161,5 +161,15 @@ namespace MoodAnalyserTest
                 Assert.AreEqual(expected, ex.Message);
             }
         }
+        /// <summary>
+        /// Test case 5- Refactor
+        /// </summary>
+        [Test]
+        public void GivenMoodAnalyserOptionalVariable_ShouldReturnObject()//5.1
+        {
+            object expected = new MoodAnalyser("Parameter constructor");
+            object actual = MoodAnalyserFactory.CreateMoodAnalyserOptionalVariable("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyser", "Parameter constructor");
+            expected.Equals(actual);
+        }
     }
 }
