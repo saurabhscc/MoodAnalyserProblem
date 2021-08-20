@@ -110,6 +110,27 @@ namespace moodanalyserproblem
                 return ex;
             }
         }
+        /// <summary>
+        /// Use Reflection to Invoke method
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="methodName"></param>
+        /// <returns></returns>
+        public static string InvokeAnalyseMood(string message, string methodName)
+        {
+            try
+            {
+                Type type = Type.GetType("MoodAnalyser.AnalyseMood");
+                object moodAnalyseObject = MoodAnalyserFactory.CreateMoodAnalyserParameterizedConstructor("MoodAnalyserProblem.MoodAnalyser", "MoodAnalyser", message);
+                MethodInfo methodInfo = type.GetMethod(methodName);
+                object mood = methodInfo.Invoke(moodAnalyseObject, null);
+                return mood.ToString();
+            }
+            catch (NullReferenceException  )
+            {
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD, "No method found");
+            }
+        }
     }
 }
 
